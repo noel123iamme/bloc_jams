@@ -30,6 +30,22 @@ var albumMarconi = {
     ]
 };
 
+// 3rd Album
+var albumPop = {
+    title: 'Pop! Goes the Weasel',
+    artist: 'Nursery Rhymes',
+    label: 'Kids',
+    year: '1853',
+    albumArtUrl: 'assets/images/album_covers/19.png',
+    songs: [
+        { title: 'Up and down the City Road', duration: '1:01' },
+        { title: 'In and out the Eagle', duration: '5:01' },
+        { title: 'That\'s the way the money goes', duration: '3:21'},
+        { title: 'Jack in the box', duration: '3:14' },
+        { title: 'London Bridge', duration: '2:15'}
+    ]
+};
+
 var createSongRow = function(songNumber, songName, songLength) {
     var template =
         '<tr class="album-view-song-item">'
@@ -62,5 +78,14 @@ var setCurrentAlbum = function(album) {
 };
 
 window.onload = function() {
+    var i = 0;
+    var albumCovers = [albumPicasso, albumMarconi, albumPop];
+
     setCurrentAlbum(albumPicasso);
+    
+    document.getElementsByClassName('album-cover-art')[0].addEventListener("click", function() {
+        i++;
+        if (i > 2) {i = 0}
+        setCurrentAlbum(albumCovers[i]);
+    });
 };
