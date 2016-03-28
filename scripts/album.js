@@ -19,6 +19,7 @@ var currentVolume = 80;
 
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
+var $playPauseButton = $('.main-controls .play-pause');
 
 var setVolume = function (volume) {
     if (currentSoundFile) {
@@ -195,6 +196,20 @@ var previousSong = function() {
     
 };
 
+var togglePlayFromPlayerBar = function() {
+    if (currentSongFromAlbum && currentSoundFile) {
+        if (currentSoundFile.isPaused()) {
+            getSongNumberCell(currentlyPlayingSongNumber).html(pauseButtonTemplate);
+            updatePlayerBarSong(playerBarPauseButton);
+            currentSoundFile.play();
+        } else {
+            getSongNumberCell(currentlyPlayingSongNumber).html(playButtonTemplate);
+            updatePlayerBarSong(playerBarPlayButtton);
+            currentSoundFile.pause();
+        }
+    }
+};
+
 $(document).ready(function() {
     var i = 0;
     $albumImage.click(function() {
@@ -206,4 +221,5 @@ $(document).ready(function() {
     
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
+    $playPauseButton.click(togglePlayFromPlayerBar)
 });
